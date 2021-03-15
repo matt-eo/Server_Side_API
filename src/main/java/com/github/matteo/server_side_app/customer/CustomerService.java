@@ -37,6 +37,17 @@ public class CustomerService {
                 });
     }
 
+    Customer getCustomerByEmail(String email) {
+        return customerRepo.findCustomerByEmail(email)
+                .orElseThrow(() -> {
+                    NotFoundException notFoundException = new NotFoundException(
+                            "Customer NOT found"
+                    );
+                    log.error("error in getting customer {}", notFoundException.toString());
+                    return notFoundException;
+                });
+    }
+
     void saveCustomer(Customer customer) {
         log.info("Saving Customer...");
         customerRepo.save(customer);
@@ -45,7 +56,7 @@ public class CustomerService {
     void updateCustomer(Customer customer, UUID id) {
         Optional<Customer> maybeCustomer = customerRepo.findById(id);
         if (maybeCustomer.isEmpty()) {
-            throw new IllegalStateException("The customer with id this id does not exist");
+            throw new IllegalStateException("The customer with id: " + id + " does not exist");
         }
         Customer toUpdate = new Customer(customer);
         customerRepo.save(toUpdate);
@@ -54,7 +65,7 @@ public class CustomerService {
     void deleteCustomerById(UUID id) {
         Optional<Customer> maybeCustomer = customerRepo.findById(id);
         if (maybeCustomer.isEmpty()) {
-            throw new IllegalStateException("The customer with id this id does not exist");
+            throw new IllegalStateException("The customer with id: " + id + " does not exist");
         }
         customerRepo.deleteById(id);
     }

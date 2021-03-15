@@ -28,6 +28,11 @@ public class CustomerController {
         return customerService.getCustomer(id);
     }
 
+    @GetMapping("email/{customer_email}")
+    public Customer getCustomerByEmail(@PathVariable("customer_email") String email) {
+        return customerService.getCustomerByEmail(email);
+    }
+
     @PostMapping("register")
     public String createCustomer(@Valid @RequestBody Customer customer) {
         customerService.saveCustomer(customer);
