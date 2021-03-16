@@ -32,7 +32,7 @@ public class CustomerService {
                             "Customer NOT found"
                     );
                     log.error("error in getting customer {}", notFoundException.toString());
-                    return notFoundException;
+                    throw notFoundException;
                 });
     }
 

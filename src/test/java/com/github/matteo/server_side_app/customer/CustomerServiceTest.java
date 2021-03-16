@@ -33,7 +33,7 @@ class CustomerServiceTest {
     }
 
     @Test
-    void itShouldGetAllSavedCustomers() {
+    void itShould_Get_AllSavedCustomers() {
         // Given
         Customer jamila = new Customer(
                 1L,
@@ -62,7 +62,7 @@ class CustomerServiceTest {
     }
 
     @Test
-    void itShouldGetCustomer() {
+    void itShould_GetCustomer() {
         // Given
         Customer otto = new Customer(
                 UUID.randomUUID(),
@@ -79,4 +79,5 @@ class CustomerServiceTest {
         // Then
         assertEquals(otto, actual);
     }
+
 }

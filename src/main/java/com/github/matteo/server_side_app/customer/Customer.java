@@ -104,7 +104,7 @@ public class Customer {
         this.address = address;
     }
 
-    public Customer(@NotBlank String name, @NotBlank String password, String email, String address) {
+    public Customer(String name, String password, String email, String address) {
         this(UUID.randomUUID(), name, password, email, address);
     }
 
