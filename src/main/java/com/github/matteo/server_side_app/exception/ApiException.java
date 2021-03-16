@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 
 import java.time.ZonedDateTime;
 
-@Data // This Lombok annotation will generate getters/setters/equals etc.. for us
+@Data // This Lombok annotation will generate getters/setters/equals etc...
 public class ApiException {
 
     private final String message;

@@ -1,5 +1,6 @@
 package com.github.matteo.server_side_app.customer;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +17,19 @@ import static org.junit.jupiter.api.Assertions.*;
 @AutoConfigureTestDatabase(replace= AutoConfigureTestDatabase.Replace.NONE)
 class CustomerServiceTest {
 
-    private CustomerService underTest;
     @Autowired
     private CustomerRepository customerRepository;
+
+    private CustomerService underTest;
 
     @BeforeEach
     void setUp() {
         underTest = new CustomerService(customerRepository);
+    }
+
+    @AfterEach
+    void cleanUp() {
+        customerRepository.deleteAll();
     }
 
     @Test
@@ -58,7 +65,6 @@ class CustomerServiceTest {
     void itShouldGetCustomer() {
         // Given
         Customer otto = new Customer(
-                3L,
                 UUID.randomUUID(),
                 "Otto Marzotto",
                 "NvI88ddd6go",
@@ -68,7 +74,7 @@ class CustomerServiceTest {
 
         // When
         customerRepository.save(otto);
-        Customer actual = underTest.getCustomer(3L);
+        Customer actual = underTest.getCustomer(1L);
 
         // Then
         assertEquals(otto, actual);

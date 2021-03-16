@@ -22,8 +22,8 @@ import java.util.UUID;
                 @UniqueConstraint(name = "customer_email_unique", columnNames = "email")
         }
 )
-@ToString // Lombok annotation - will generate toString for us
-@EqualsAndHashCode // Lombok will create equals and hashcode for us
+@ToString
+@EqualsAndHashCode
 @Setter
 public class Customer {
 
@@ -104,6 +104,9 @@ public class Customer {
         this.address = address;
     }
 
+    public Customer(@NotBlank String name, @NotBlank String password, String email, String address) {
+        this(UUID.randomUUID(), name, password, email, address);
+    }
 
     public Customer(Customer customer) {
         this.accountRecoveryKey = customer.getAccountRecoveryKey();
@@ -111,14 +114,6 @@ public class Customer {
         this.password = customer.getPassword();
         this.email = customer.getEmail();
         this.address = customer.getAddress();
-    }
-
-    public Customer(@NotBlank String name, @NotBlank String password, String email, String address) {
-        this(UUID.randomUUID(), name, password, email, address);
-    }
-
-    public Customer(String name) {
-        this(UUID.randomUUID(), name, "password", "email@gmail.com", "78 Lintorpe Road");
     }
 
     public Long getId() {
@@ -159,9 +154,4 @@ public class Customer {
             order.setCustomer(null);
         }
     }
-
-    public List<CustomerOrder> getOrders() {
-        return orders;
-    }
-
 }
