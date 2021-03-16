@@ -28,26 +28,27 @@ class CustomerServiceTest {
     @Test
     void itShouldGetAllSavedCustomers() {
         // Given
-        UUID id1 = UUID.randomUUID();
-        UUID id2 = UUID.randomUUID();
-
         Customer jamila = new Customer(
-                id1,
+                1L,
+                UUID.randomUUID(),
                 "Jamila Harris",
                 "NvI88sm26go",
-                "jam@gmail.com"
+                "jam@gmail.com",
+                "80 Arcor Street"
         );
 
         Customer ali = new Customer(
-                id2,
+                2L,
+                UUID.randomUUID(),
                 "Ali Baba",
                 "as8BNNhxxj",
-                "alibaba@gmail.com"
+                "alibaba@gmail.com",
+                "70 Calma Avenue"
         );
 
         // When
         customerRepository.saveAll(Arrays.asList(jamila, ali));
-        List<Customer> customers = customerRepository.findAllById(Arrays.asList(id1, id2));
+        List<Customer> customers = customerRepository.findAllById(Arrays.asList(1L, 2L));
 
         // Then
         assertEquals(2, customers.size());
@@ -56,18 +57,18 @@ class CustomerServiceTest {
     @Test
     void itShouldGetCustomer() {
         // Given
-        UUID id = UUID.randomUUID();
-
         Customer otto = new Customer(
-                id,
+                3L,
+                UUID.randomUUID(),
                 "Otto Marzotto",
                 "NvI88ddd6go",
-                "ottomarzo@gmail.com"
+                "ottomarzo@gmail.com",
+                "101 Warehouse Court"
         );
 
         // When
         customerRepository.save(otto);
-        Customer actual = underTest.getCustomer(id);
+        Customer actual = underTest.getCustomer(3L);
 
         // Then
         assertEquals(otto, actual);

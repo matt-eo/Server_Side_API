@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v1/customers")
@@ -24,7 +23,7 @@ public class CustomerController {
     }
 
     @GetMapping("{id}")
-    public Customer getCustomer(@PathVariable("id") UUID id) {
+    public Customer getCustomer(@PathVariable("id") Long id) {
         return customerService.getCustomer(id);
     }
 
@@ -40,12 +39,12 @@ public class CustomerController {
     }
 
     @PutMapping("update/{id}")
-    public void updateCustomer(@Valid @RequestBody Customer customer, @PathVariable("id") UUID id) {
+    public void updateCustomer(@Valid @RequestBody Customer customer, @PathVariable("id") Long id) {
         customerService.updateCustomer(customer, id);
     }
 
     @DeleteMapping("delete/{id}")
-    public void deleteCustomerById(@PathVariable("id") UUID id) {
+    public void deleteCustomerById(@PathVariable("id") Long id) {
         customerService.deleteCustomerById(id);
     }
 

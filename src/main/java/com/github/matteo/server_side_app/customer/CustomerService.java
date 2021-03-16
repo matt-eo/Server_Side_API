@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @Slf4j // Lombok will provide logger accessible via 'log.'
@@ -26,7 +25,7 @@ public class CustomerService {
         return customerRepo.findAll();
     }
 
-    Customer getCustomer(UUID id) {
+    Customer getCustomer(Long id) {
         return customerRepo.findById(id)
                 .orElseThrow(() -> {
                     NotFoundException notFoundException = new NotFoundException(
@@ -53,7 +52,7 @@ public class CustomerService {
         customerRepo.save(customer);
     }
 
-    void updateCustomer(Customer customer, UUID id) {
+    void updateCustomer(Customer customer, Long id) {
         Optional<Customer> maybeCustomer = customerRepo.findById(id);
         if (maybeCustomer.isEmpty()) {
             throw new IllegalStateException("The customer with id: " + id + " does not exist");
@@ -62,7 +61,7 @@ public class CustomerService {
         customerRepo.save(toUpdate);
     }
 
-    void deleteCustomerById(UUID id) {
+    void deleteCustomerById(Long id) {
         Optional<Customer> maybeCustomer = customerRepo.findById(id);
         if (maybeCustomer.isEmpty()) {
             throw new IllegalStateException("The customer with id: " + id + " does not exist");
